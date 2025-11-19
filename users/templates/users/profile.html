@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <main>
+        <!-- Team-profile Start -->
+        <div class="team-profile py-5">
+            <div class="container bg-outline-dark pt-4">
+                {% if delete %}
+                    <div class="row mb-5 alert alert-danger">
+                        <div class="col-12">
+                            <p class="text-center p-4">Are you sure you want to delete the post "<strong>{{ post.title }}</strong>"?</p>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="text-center">
+                                    <button class="btn btn-danger">Yes</button> 
+                                    <a href="{% url 'users:profile' %}" class="btn" style="background-color:rgb(54, 52, 52)">No</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="row p-2 mb-4">
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="single-profile">
+                            <!-- Front -->
+                            <div class="single-profile-front pb-5" style="border:1px solid #ff656a;">
+                                <div class="profile-img text-center pt-4">
+                                    {% if user.profile_pic %}
+                                        <img style="width:250px;height:250px;border-radius:50%;" class="img-fluid img-thumbnail" src="{{ user.profile_pic.url }}" alt="">
+                                    {% else %}
+                                        <img style="width:250px;height:250px;border-radius:50%;" class="img-fluid img-thumbnail" src="{% static 'assets/img/avatar.png' %}" alt="">
+                                    {% endif %}
+                                </div>
+                                <div class="profile-caption text-center">
+                                    <h4><a href="#">{{ user.first_name }} {{ user.last_name }}</a></h4>
+                                    <p>
+                                        {{ user.occupation }} <br>
+                                        <small>{{ user.address }}</small>
+                                    </p>
+                                </div>
+                                <div class="text-center pb-3">
+                                    <a href="#" class="btn header-btn">Follow</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-8 col-md-6">
+                        <div class="single-profile">
+                            <!-- Back -->
+                            <div class="single-profile-back-last" style="border:none;">
+                                <h2 class="mt-3">Profile Details</h2>
+                                <table class="table">
+                                    <tr>
+                                        <th>Username</th>
+                                        <td>{{ user.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>{{ user.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone</th>
+                                        <td>{{ user.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address</th>
+                                        <td>{{ user.address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Bio</th>
+                                        <td>{{ user.bio }}</td>
+                                    </tr>
+                                </table>
+                                <div class="form-group mt-4">
+                                    <a href="{% url 'users:update_profile' %}" class="button rounded button-contactForm boxed-btn">Edit Profile</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Team-profile End-->
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="single-profile mb-30 mt-4 mb-5">
+                            <h2 class="p-5 text-center"><span class="pb-3" style="border-bottom:4px solid #ff656a;">Posts cre</span>ated by you</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for post in posts %}
+                        <div class="col-md-4">
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <img height="200" class="card-img rounded-0" src="{{ post.thumbnail.url }}" alt="">
+                                    <a href="{% url 'posts:detail' slug=post.slug %}" class="blog_item_date">
+                                        <h3>Read More</h3>
+                                    </a>
+                                </div>
+
+                                <div class="blog_details">
+                                    <a class="d-inline-block" href="{% url 'posts:detail' slug=post.slug %}">
+                                        <h2>{{ post.title }}</h2>
+                                    </a>
+                                    <p>{{ post.content|safe|truncatechars:'100' }}</p>
+                                    <ul class="blog-info-link">
+                                        <li><a href="{% url 'posts:update' slug=post.slug %}"><i class="fa fa-edit"></i> Update</a></li>
+                                        <li><a href="{% url 'posts:delete' slug=post.slug %}"><i class="fa fa-trash"></i> Delete</a></li>
+                                    </ul>
+                                </div>
+                            </article>
+                        </div>
+                    {% empty %}
+                        <div class="col-12 text-center pb-5">
+                            <h5 class="">You have'nt added any post yet.</h5>
+                            <a href="{% url 'posts:add' %}" class="btn">Add A Post Now</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+{% endblock content %}

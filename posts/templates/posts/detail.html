@@ -1,0 +1,194 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- slider Area Start-->
+      <div class="slider-area ">
+         <!-- Mobile Menu -->
+         <div class="single-slider slider-height2 d-flex align-items-center" data-background="{% static 'assets/img/hero/Industries_hero.jpg' %}">
+             <div class="container">
+                 <div class="row">
+                     <div class="col-xl-12">
+                         <div class="hero-cap text-center">
+                             <h2>{{ post.title }}</h2>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <!-- slider Area End-->
+     
+   <!--================Blog Area =================-->
+   <section class="blog_area single-post-area section-padding">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-8 posts-list">
+                    <div class="single-post">
+                        <div class="feature-img">
+                            <img style="width:100%;" class="img-fluid" src="{{ post.thumbnail.url }}" alt="">
+                        </div>
+                        <div class="blog_details">
+                            <h2>{{ post.title }}</h2>
+                            <div class="blog-author">
+                        <div class="media align-items-center">
+                           {% if post.user.profile_pic %}
+                              <img src="{{ post.user.profile_pic.url }}" alt="">
+                           {% else %}
+                              <img src="{% static 'assets/img/avatar.png' %}" alt="">
+                           {% endif %}
+                            <div class="media-body">
+                                <a href="#">
+                                <h4>{{ post.user.first_name }} {{ post.user.last_name }}</h4>
+                                </a>
+                                <p>{{ post.user.bio }}</p>
+                            </div>
+                        </div>
+                    </div>
+                     <ul class="blog-info-link mt-3 mb-4">
+                         <li><a href="#"><i class="fa fa-calendar"></i> {{ post.created }}</a></li>
+                         <li><a href="#"><i class="fa fa-building"></i> {{ post.category }}</a></li>
+                     </ul>
+                     <p class="excert">
+                         {{ post.content|linebreaks }}
+                     </p>
+                     <p>
+                     </p>
+                  </div>
+               </div>
+               <div class="navigation-top">
+            
+               </div>
+               <div class="comment-form pb-4" style="background:rgb(234, 234, 234);padding-left: 30px;padding-right: 30px;">
+                  {% if request.user.is_authenticated %}
+                     <h4>Leave a comment for this post</h4>
+                     <form method="post" class="form-contact comment_form" action="" id="commentForm">
+                        {% csrf_token %}
+                        <div class="row">
+                           <div class="col-12">
+                              <div class="form-group bg-light">
+                                 {{ form.content }}
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <button type="submit" class="button button-contactForm btn_1 boxed-btn">Comment</button>
+                        </div>
+                     </form>
+                  {% else %}
+                     <p><a class="text-dark" href="{% url 'users:login' %}?next={{request.path}}">Login now to add your comment for this post</a></p>
+                  {% endif %}
+               </div>
+               <div class="comments-area">
+                  {% if comments %}
+                     <h4>
+                        {{ comments.count }} 
+                        {% if comments.count > 1 %}
+                           Comments
+                        {% else %}
+                           Comment
+                        {% endif %}
+                     </h4>
+                     {% for comment in comments %}
+                        <div class="comment-list">
+                           <div class="single-comment justify-content-between d-flex">
+                              <div class="user justify-content-between d-flex">
+                                 <div class="thumb">
+                                    {% if comment.user.profile_pic %}
+                                       <img src="{{comment.user.profile_pic.url}}" alt="">
+                                    {% else %}
+                                       <img src="{% static 'assets/img/avatar.png' %}" alt="">
+                                    {% endif %}
+                                 </div>
+                                 <div class="desc">
+                                    <p class="comment">
+                                       {{ comment.content }}
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                       <div class="d-flex align-items-center">
+                                          <h5>
+                                             <a href="#">{{ comment.user.username.capitalize }}</a>
+                                          </h5>
+                                          <p class="date">{{ comment.created }}</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     {% endfor %}
+                  {% else %}
+                        <h4>No comments yet for this.</h4>
+                  {% endif %}
+               </div>
+            </div>
+            <div class="col-lg-4">
+               <div class="blog_right_sidebar">
+                  <aside class="single_sidebar_widget search_widget">
+                            <form action="{% url 'posts:home' %}">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input name="search" type="text" class="form-control" required placeholder='Search Keyword'
+                                            onfocus="this.placeholder = ''"
+                                            onblur="this.placeholder = 'Search Keyword'">
+                                        <div class="input-group-append">
+                                            <button class="btns" type="button"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                    type="submit">Search</button>
+                            </form>
+                        </aside>
+                  
+                  <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title">Category</h4>
+                            <ul class="list cat-list">
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Python</p>
+                                        
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Javascript</p>
+                                        
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Tech</p>
+                                        
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Backend</p>
+                                        
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Frontend</p>
+                                        
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Fullstack</p>
+                                        
+                                    </a>
+                                </li>
+                            </ul>
+                        </aside>
+                 
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!--================ Blog Area end =================-->
+
+{% endblock content %}

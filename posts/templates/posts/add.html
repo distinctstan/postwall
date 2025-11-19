@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- slider Area Start-->
+      <div class="slider-area ">
+         <!-- Mobile Menu -->
+         <div class="single-slider slider-height2 d-flex align-items-center" data-background="{% static 'assets/img/hero/Industries_hero.jpg' %}">
+             <div class="container">
+                 <div class="row">
+                     <div class="col-xl-12">
+                         <div class="hero-cap text-center">
+                             {% if update %}
+                                <h2>Update Your Post</h2>
+                             {% else %}
+                                <h2>Create Your Post</h2>
+                             {% endif %}
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <!-- slider Area End-->
+    
+    <div style="background:#ff656a" class="d-flex justify-content-center">
+        <form action="" method="post" enctype="multipart/form-data" class="form-contact comment_form p-5 bg-dark mb-5 mt-5">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-group mb-3 mt-4" style="color:white">
+                    <span>{{ field.label }}</span>
+                    <p>{{ field }}</p>
+                    {% if field.errors %}
+                        <small style="color:#ff656a">{{ field.errors }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div class="p-4"></div>
+            <div class="form-group mt-4">
+                {% if update %}
+                    <button type="submit" class="col-12 button button-contactForm btn_1 boxed-btn">Update</button> <br><br>
+                    <a href="{% url 'users:profile' %}" class="button rounded col-12 button-contactForm boxed-btn">Cancel</a>
+                {% else %}
+                    <button type="submit" class="col-12 button button-contactForm btn_1 boxed-btn">Create</button> <br><br>
+                    <a href="{% url 'users:profile' %}" class="button rounded col-12 button-contactForm boxed-btn">Cancel</a>
+                {% endif %}
+            </div>
+            
+        </form>
+    </div>
+
+{% endblock content %}
+

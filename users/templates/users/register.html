@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- slider Area Start-->
+      <div class="slider-area ">
+         <!-- Mobile Menu -->
+         <div class="single-slider slider-height2 d-flex align-items-center" data-background="{% static 'assets/img/hero/Industries_hero.jpg' %}">
+             <div class="container">
+                 <div class="row">
+                     <div class="col-xl-12">
+                         <div class="hero-cap text-center">
+                             <h2>Get An Account</h2>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <!-- slider Area End-->
+    
+    <div style="background:#ff656a" class="d-flex justify-content-center">
+        <form action="" method="post" class="form-contact comment_form p-5 bg-dark mb-5 mt-5">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3 mt-4">
+                    <p>{{ field }}</p>
+                    {% if field.errors %}
+                        <small style="color:#ff656a">{{ field.errors }}</small>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div class="form-group mt-4">
+                <button type="submit" class="col-12 button button-contactForm btn_1 boxed-btn">Register</button>
+            </div>
+            <p>Already have an account? <a href="{% url 'users:login' %}">Login</a></p>
+        </form>
+    </div>
+
+{% endblock content %}
+

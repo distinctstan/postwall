@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- slider Area Start-->
+      <div class="slider-area ">
+         <!-- Mobile Menu -->
+         <div class="single-slider slider-height2 d-flex align-items-center" data-background="{% static 'assets/img/hero/Industries_hero.jpg' %}">
+             <div class="container">
+                 <div class="row">
+                     <div class="col-xl-12">
+                         <div class="hero-cap text-center">
+                             <h2>Get your profile updated</h2>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <!-- slider Area End-->
+
+    <div class="row request-back-area section-padding30">
+        <div class="col-md-6 offset-md-3">
+            <form action="" method="post" enctype="multipart/form-data" class="form-contact contact_form p-5" style="background-color: black;">
+                {% csrf_token %}
+
+                <div class="row">
+                    {% for field in form %}
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <p>{{ field }}</p>
+                                {% if field.errors %}
+                                    <small style="color:#ff656a">{{ field.errors }}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group mt-3">
+                    <button type="submit" class="button col-12 btn header-btn">Update Profile</button>
+                </div>
+                <div class="form-group mt-3">
+                    <a href="{% url 'users:profile' %}" class="button rounded col-12 button-contactForm boxed-btn">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}

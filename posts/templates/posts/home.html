@@ -1,0 +1,183 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- slider Area Start-->
+     <div class="slider-area ">
+        <!-- Mobile Menu -->
+        <div class="single-slider slider-height2 d-flex align-items-center" data-background="{% static 'assets/img/hero/Industries_hero.jpg' %}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Welcome To PostWall</h2>
+                            <p style="color:whitesmoke;">This is a platform for both seasoned and aspiring bloggers. Come and post it here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+
+    <!--================Blog Area =================-->
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+
+                        {% if feedback %}
+                            <div class="">
+                                <h4 class="p-4 alert alert-info">{{ feedback }}</h4>
+                            </div>
+                        {% endif %}
+
+                        {% if featured_post %}
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <img class="card-img rounded-0" src="{{ featured_post.thumbnail.url }}" alt="">
+                                    <a href="{% url 'posts:detail' slug=featured_post.slug %}" class="blog_item_date">
+                                        <h3>Read More</h3>
+                                    </a>
+                                </div>
+
+                                <div class="blog_details">
+                                    <a class="d-inline-block" href="{% url 'posts:detail' featured_post.slug %}">
+                                        <h2>{{ featured_post.title }}</h2>
+                                    </a>
+                                    <p>{{ featured_post.content|truncatechars:'100' }}</p>
+                                </div>
+                            </article>
+                        {% endif %}
+
+                        <div class="row">
+                            {% for post in posts %}
+
+                                <div class="col-md-6">
+                                    <article class="blog_item">
+                                        <div class="blog_item_img">
+                                            <img height="200" class="card-img rounded-0" src="{{ post.thumbnail.url }}" alt="">
+                                            <a href="{% url 'posts:detail' slug=post.slug %}" class="blog_item_date">
+                                                <h3>Read More</h3>
+                                            </a>
+                                        </div>
+
+                                        <div class="blog_details">
+                                            <a class="d-inline-block" href="{% url 'posts:detail' post.slug %}">
+                                                <h2>{{ post.title }}</h2>
+                                            </a>
+                                            <p>{{ post.content|truncatechars:'100' }}</p>
+                                            <ul class="blog-info-link">
+                                                <li><a href="#"><i class="fa fa-building"></i> {{ post.category.title }}</a></li>
+                                                <li><a href="#"><i class="fa fa-comments"></i> {{ post.comments.count }} Comments</a></li>
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </div>
+                        
+                            {% endfor %}
+                        </div>
+
+
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                {% if posts.has_previous %}
+                                    <li class="page-item">
+                                        <a href="?page={{posts.previous_page_number}}" class="page-link" aria-label="Previous">
+                                            <i class="ti-angle-left"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% for page in paginate.page_range %}
+                                    {% if page == posts.number %}
+                                        <li class="page-item active">
+                                            <a href="?page={{page}}" class="page-link">{{page}}</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <a href="?page={{page}}" class="page-link">{{page}}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if posts.has_next %}
+                                    <li class="page-item">
+                                        <a href="?page={{posts.next_page_number}}" class="page-link" aria-label="Next">
+                                            <i class="ti-angle-right"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                            <form action="">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input name="search" type="text" class="form-control" required placeholder='Search Keyword'
+                                            onfocus="this.placeholder = ''"
+                                            onblur="this.placeholder = 'Search Keyword'">
+                                        <div class="input-group-append">
+                                            <button class="btns" type="button"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                    type="submit">Search</button>
+                            </form>
+                        </aside>
+
+                        <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title">Category</h4>
+                            <ul class="list cat-list">
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Python</p>
+                                        
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Javascript</p>
+                                        
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Tech</p>
+                                        
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Backend</p>
+                                        
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Frontend</p>
+                                        
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="d-flex">
+                                        <p>Fullstack</p>
+                                        
+                                    </a>
+                                </li>
+                            </ul>
+                        </aside>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================Blog Area =================-->
+
+{% endblock content %}
