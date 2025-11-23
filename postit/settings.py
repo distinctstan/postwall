@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
-# import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,17 +78,9 @@ WSGI_APPLICATION = 'postit.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'postwall_db',  # Name of your PostgreSQL database
-    #     'USER': 'postwall_db_user',  # Username for your PostgreSQL database
-    #     'PASSWORD': 'zzD4QY4bG9nHnFEyoZliWONNFTANmZe2',  # Password for your PostgreSQL user
-    #     'HOST': 'dpg-d4hdm6ur433s73eme5tg-a',  # Or the IP address/hostname of your PostgreSQL server
-    #     'PORT': '5432',  # Default PostgreSQL port
-    # }
     # 'default': dj_database_url.config(
     #     # Replace this value with your local database's connection string.
     #     default='postgresql://postwall_db_user:zzD4QY4bG9nHnFEyoZliWONNFTANmZe2@dpg-d4hdm6ur433s73eme5tg-a/postwall_db',
