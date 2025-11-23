@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-85p&^gh*673w-mzi!d11=0lfky8khg7iv82ub-igbn5drfj)-x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['postwall-jhxr.onrender.com','102.89.32.38:0','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['postwall-jhxr.onrender.com','34.82.26.101:0','102.89.32.38:0','127.0.0.1','localhost']
 
 
 # Application definition
