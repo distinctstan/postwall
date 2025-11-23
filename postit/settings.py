@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-85p&^gh*673w-mzi!d11=0lfky8khg7iv82ub-igbn5drfj)-x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['postwall-jhxr.onrender.com','34.82.26.101:0','102.89.32.38:0','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['postwall-jhxr.onrender.com','127.0.0.1','localhost']
 
 
 # Application definition
@@ -78,18 +78,18 @@ WSGI_APPLICATION = 'postit.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postwall_db',  # Name of your PostgreSQL database
-        'USER': 'postwall_db_user',  # Username for your PostgreSQL database
-        'PASSWORD': 'zzD4QY4bG9nHnFEyoZliWONNFTANmZe2',  # Password for your PostgreSQL user
-        'HOST': 'dpg-d4hdm6ur433s73eme5tg-a',  # Or the IP address/hostname of your PostgreSQL server
-        'PORT': '5432',  # Default PostgreSQL port
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'postwall_db',  # Name of your PostgreSQL database
+    #     'USER': 'postwall_db_user',  # Username for your PostgreSQL database
+    #     'PASSWORD': 'zzD4QY4bG9nHnFEyoZliWONNFTANmZe2',  # Password for your PostgreSQL user
+    #     'HOST': 'dpg-d4hdm6ur433s73eme5tg-a',  # Or the IP address/hostname of your PostgreSQL server
+    #     'PORT': '5432',  # Default PostgreSQL port
+    # }
     # 'default': dj_database_url.config(
     #     # Replace this value with your local database's connection string.
     #     default='postgresql://postwall_db_user:zzD4QY4bG9nHnFEyoZliWONNFTANmZe2@dpg-d4hdm6ur433s73eme5tg-a/postwall_db',
@@ -144,7 +144,7 @@ if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
