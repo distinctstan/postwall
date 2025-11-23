@@ -78,9 +78,17 @@ WSGI_APPLICATION = 'postit.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'postwall_db',  # Name of your PostgreSQL database
+        'USER': 'postwall_db_user',  # Username for your PostgreSQL database
+        'PASSWORD': 'zzD4QY4bG9nHnFEyoZliWONNFTANmZe2',  # Password for your PostgreSQL user
+        'HOST': 'dpg-d4hdm6ur433s73eme5tg-a',  # Or the IP address/hostname of your PostgreSQL server
+        'PORT': '5432',  # Default PostgreSQL port
     }
     # 'default': dj_database_url.config(
     #     # Replace this value with your local database's connection string.
