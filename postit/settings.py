@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
-import dj_database_url
+# import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,15 +78,15 @@ WSGI_APPLICATION = 'postit.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postwall_db_user:zzD4QY4bG9nHnFEyoZliWONNFTANmZe2@dpg-d4hdm6ur433s73eme5tg-a/postwall_db',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+    # 'default': dj_database_url.config(
+    #     # Replace this value with your local database's connection string.
+    #     default='postgresql://postwall_db_user:zzD4QY4bG9nHnFEyoZliWONNFTANmZe2@dpg-d4hdm6ur433s73eme5tg-a/postwall_db',
+    #     conn_max_age=600
+    # )
 }
 
 
